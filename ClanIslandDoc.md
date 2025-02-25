@@ -219,7 +219,10 @@ POST /clans/islands/attack
 ### Response:
 
 ```json
-true | false
+{
+  "gemsStolen": number,
+  "swapped": boolean
+}
 ```
 
 ### Описание:
