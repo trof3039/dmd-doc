@@ -74,11 +74,12 @@ true | false
 
 ---
 
-## 4. Генерация кланового острова (DEV)
+## r. Генерация кланового острова
 
 ### Endpoint:
 
 ```
+POST /clans/islands/generate
 POST /clans/islands/generate/dev
 ```
 
@@ -107,48 +108,12 @@ POST /clans/islands/generate/dev
 
 ### Описание:
 
-Создаёт тестовый остров для клана.
-
----
-
-## 5. Генерация кланового острова
-
-### Endpoint:
-
-```
-POST /clans/islands/generate
-```
-
-### Request Body:
-
-```json
-{
-  "clanId": number
-}
-```
-
-### Response:
-
-```json
-{
-  "id": number,
-  "clanId": number,
-  "multiplier": number,
-  "gemsGeneratedCount": number,
-  "gemsGeneratedTimestamp": number,
-  "gemsStolenCount": number,
-  "swapTimestamp": number,
-  "totalGemsCollected": number
-}
-```
-
-### Описание:
-
 Создаёт новый остров для клана в продакшн-версии.
+Для DEV окружения можно создавать неограниченное кол-во островов для клана.
 
 ---
 
-## 6. Удаление кланового острова (DEV)
+## 5. Удаление кланового острова (DEV)
 
 ### Endpoint:
 
@@ -176,7 +141,7 @@ true | false
 
 ---
 
-## 7. Получение случайного острова для атаки
+## 6. Получение случайного острова для атаки
 
 ### Endpoint:
 
@@ -205,7 +170,7 @@ POST /clans/islands/attack/get-random-island
 
 ---
 
-## 8. Смена случайного острова для атаки
+## 7. Смена случайного острова для атаки
 
 ### Endpoint:
 
@@ -234,7 +199,7 @@ POST /clans/islands/attack/change-random-island
 
 ---
 
-## 9. Атака на остров
+## 8. Атака на остров
 
 ### Endpoint:
 
@@ -264,7 +229,7 @@ true | false
 
 ---
 
-## 10. Получение списка всех островов
+## 9. Получение списка всех островов
 
 ### Endpoint:
 
