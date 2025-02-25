@@ -268,6 +268,29 @@ POST /clans/islands
 ]
 ```
 
+## 10. Получение текущего острова игрока
+
+### Endpoint:
+
+```
+POST /clans/islands/me
+```
+
+### Response:
+
+```json
+{
+  "id": number,
+  "clanId": number,
+  "multiplier": number,
+  "gemsGeneratedCount": number,
+  "gemsGeneratedTimestamp": number,
+  "gemsStolenCount": number,
+  "swapTimestamp": number,
+  "totalGemsCollected": number
+}
+```
+
 ### Описание:
 
 Позволяет получить список всех островов с возможностью фильтрации и пагинации.
