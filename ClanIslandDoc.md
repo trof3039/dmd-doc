@@ -74,7 +74,7 @@ true | false
 
 ---
 
-## r. Генерация кланового острова
+## 4. Генерация кланового острова
 
 ### Endpoint:
 
@@ -211,7 +211,7 @@ POST /clans/islands/attack
 
 ```json
 {
-  "clanId": number,
+  "targetIslandId": number,
   "boosters": [string]
 }
 ```
