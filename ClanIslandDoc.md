@@ -212,7 +212,7 @@ POST /clans/islands/attack
 ```json
 {
   "targetIslandId": number,
-  "boosters": [string]
+  "boosters": string[]
 }
 ```
 
