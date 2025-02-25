@@ -210,9 +210,12 @@ POST /clans/islands/attack
 ### Request Body:
 
 ```json
+    INCREASE_GEMS_STEAL = 'INCREASE_GEMS_STEAL',
+    INCREASE_SWAP_CHANCE = 'INCREASE_SWAP_CHANCE',
+    ATTACK_SPECIFIC_ISLAND = 'ATTACK_SPECIFIC_ISLAND',
 {
   "targetIslandId": number,
-  "boosters": string[]
+  "boosters": <'INCREASE_GEMS_STEAL' | 'INCREASE_SWAP_CHANCE' | 'ATTACK_SPECIFIC_ISLAND'>[]
 }
 ```
 
