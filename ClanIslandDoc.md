@@ -62,6 +62,14 @@ POST /clans/islands/buff/defence-multiplier
 POST /clans/islands/collect-gems
 ```
 
+### Request Body:
+
+```json
+{
+  "islandId": number
+}
+```
+
 ### Response:
 
 ```json
