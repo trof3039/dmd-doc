@@ -12,7 +12,8 @@ POST /clans/islands/buff/mirror-attack
 
 ```json
 {
-  "mirrorAttackClanId": number
+  "mirrorAttackClanId": number,
+  "clanId": number
 }
 ```
 
@@ -40,6 +41,14 @@ POST /clans/islands/buff/mirror-attack
 POST /clans/islands/buff/defence-multiplier
 ```
 
+### Request Body:
+
+```json
+{
+  "clanId": number
+}
+```
+
 ### Response:
 
 ```json
@@ -54,7 +63,39 @@ POST /clans/islands/buff/defence-multiplier
 
 ---
 
-## 3. Сбор клановых гемов
+## 3. Применение баффа множителя гемов
+
+### Endpoint:
+
+```
+POST /clans/islands/buff/gems-multiplier
+```
+
+### Request Body:
+
+```json
+{
+  "clanId": number
+}
+```
+
+### Response:
+
+### Response:
+
+```json
+{
+  "gemsMultiplierTimestamp": number
+}
+```
+
+### Описание:
+
+Активирует множитель гемов для клана. `gemsMultiplierTimestamp` указывает момент активации.
+
+---
+
+## 4. Сбор клановых гемов
 
 ### Endpoint:
 
@@ -73,7 +114,7 @@ POST /clans/islands/collect-gems
 ### Response:
 
 ```json
-true | false
+true
 ```
 
 ### Описание:
@@ -82,21 +123,12 @@ true | false
 
 ---
 
-## 4. Генерация кланового острова
+## 5. Генерация кланового острова
 
 ### Endpoint:
 
 ```
 POST /clans/islands/generate
-POST /clans/islands/generate/dev
-```
-
-### Request Body:
-
-```json
-{
-  "clanId": number
-}
 ```
 
 ### Response:
@@ -110,18 +142,18 @@ POST /clans/islands/generate/dev
   "gemsGeneratedTimestamp": number,
   "gemsStolenCount": number,
   "swapTimestamp": number,
-  "totalGemsCollected": number
+  "totalGemsCollected": number,
+  "attacksCount": number
 }
 ```
 
 ### Описание:
 
-Создаёт новый остров для клана в продакшн-версии.
-Для DEV окружения можно создавать неограниченное кол-во островов для клана.
+Создаёт новый остров для клана.
 
 ---
 
-## 5. Удаление кланового острова (DEV)
+## 6. Удаление кланового острова (DEV)
 
 ### Endpoint:
 
@@ -140,7 +172,7 @@ POST /clans/islands/delete/dev
 ### Response:
 
 ```json
-true | false
+true
 ```
 
 ### Описание:
@@ -149,7 +181,7 @@ true | false
 
 ---
 
-## 6. Получение случайного острова для атаки
+## 7. Получение случайного острова для атаки
 
 ### Endpoint:
 
@@ -160,6 +192,7 @@ POST /clans/islands/attack/get-random-island
 ### Response:
 
 ```json
+
 {
   "id": number,
   "clanId": number,
@@ -168,8 +201,19 @@ POST /clans/islands/attack/get-random-island
   "gemsGeneratedTimestamp": number,
   "gemsStolenCount": number,
   "swapTimestamp": number,
-  "totalGemsCollected": number
+  "totalGemsCollected": number,
+  "attacksCount": number,
+  "clan": {
+    "id": number,
+    "name": string,
+    "icon": string,
+    "power": number
+  },
+  "swapProbabilityTier": number,
+  "maxPossibleSteal": number,
+  "minPossibleSteal": number
 }
+
 ```
 
 ### Описание:
@@ -178,7 +222,7 @@ POST /clans/islands/attack/get-random-island
 
 ---
 
-## 7. Смена случайного острова для атаки
+## 8. Смена случайного острова для атаки
 
 ### Endpoint:
 
@@ -197,7 +241,17 @@ POST /clans/islands/attack/change-random-island
   "gemsGeneratedTimestamp": number,
   "gemsStolenCount": number,
   "swapTimestamp": number,
-  "totalGemsCollected": number
+  "totalGemsCollected": number,
+  "attacksCount": number,
+  "clan": {
+    "id": number,
+    "name": string,
+    "icon": string,
+    "power": number
+  },
+  "swapProbabilityTier": number,
+  "maxPossibleSteal": number,
+  "minPossibleSteal": number
 }
 ```
 
@@ -207,7 +261,7 @@ POST /clans/islands/attack/change-random-island
 
 ---
 
-## 8. Атака на остров
+## 9. Атака на остров
 
 ### Endpoint:
 
@@ -220,68 +274,31 @@ POST /clans/islands/attack
 ```json
 {
   "targetIslandId": number,
-  "boosters": <'INCREASE_GEMS_STEAL' | 'INCREASE_SWAP_CHANCE' | 'ATTACK_SPECIFIC_ISLAND'>[]
+  "boosters": string[]
 }
 ```
 
 ### Response:
 
 ```json
-{
-  "gemsStolen": number,
-  "swapped": boolean
+{ 
+  "gemsStolen": number, 
+  "swapped": boolean 
 }
 ```
 
 ### Описание:
 
 Позволяет атаковать остров другого клана.
-`boosters` - список использованных бустеров.
 
 ---
 
-## 9. Получение списка всех островов
+## 10. Получение информации о текущем острове клана
 
 ### Endpoint:
 
 ```
-POST /clans/islands
-```
-
-### Request Body:
-
-```json
-{
-  "filters": { "key": any },
-  "offset": number,
-  "limit": number,
-  "order": string
-}
-```
-
-### Response:
-
-```json
-[
-  {
-    "id": number,
-    "clanId": number,
-    "multiplier": number,
-    "gemsGeneratedCount": number,
-    "gemsGeneratedTimestamp": number,
-    "gemsStolenCount": number,
-    "swapTimestamp": number,
-    "totalGemsCollected": number
-  }
-]
-```
-
-## 10. Получение текущего острова игрока
-
-### Endpoint:
-
-```
-POST /clans/islands/me
+POST /clans/islands/my
 ```
 
 ### Response:
@@ -295,10 +312,45 @@ POST /clans/islands/me
   "gemsGeneratedTimestamp": number,
   "gemsStolenCount": number,
   "swapTimestamp": number,
-  "totalGemsCollected": number
+  "totalGemsCollected": number,
+  "attacksCount": number,
+  "config": {
+    "defenceMultiplierPrice": number,
+    "defenceMultiplierDuration": number,
+    "mirrorAttackPrice": number,
+    "mirrorAttackDuration": number,
+    "gemsMultiplierPrice": number,
+    "gemsMultiplierDuration": number,
+    "gemCollectionCD": number,
+    "swapImmumityDuration": number,
+    "changeRandomIslandPrice": number,
+    "boosters": string[]
+  }
 }
 ```
 
 ### Описание:
 
-Позволяет получить список всех островов с возможностью фильтрации и пагинации.
+Возвращает информацию о текущем острове клана.
+
+## 11. Добавление персонального бустера (DEV)
+
+### Endpoint:
+
+```
+POST /clans/islands/add-boosters/dev
+```
+
+### Request Body:
+
+```json
+{
+  "boosters": string[]
+}
+```
+
+### Response:
+
+```json
+true
+```
